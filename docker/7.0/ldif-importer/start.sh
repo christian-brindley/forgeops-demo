@@ -11,7 +11,7 @@ echo "ds-idrepo-0 is responding"
 
 # Set the DS passwords for each store
 if [ -f "/opt/opendj/ds-passwords.sh" ]; then
-    echo "Setting random DS passwords script..."
+    echo "Setting directory service account passwords"
     /opt/opendj/ds-passwords.sh
     if [ $? -ne 0 ]; then
         echo "ERROR: Pre install script failed"
@@ -20,6 +20,7 @@ if [ -f "/opt/opendj/ds-passwords.sh" ]; then
 fi
 
 # Apply the new ldap config entries
+# Remove this once the ds profile has been updated to include FBC
 /opt/opendj/bin/ldapmodify -c \
     -D uid=admin \
     -j /var/run/secrets/opendj-passwords/dirmanager.pw \

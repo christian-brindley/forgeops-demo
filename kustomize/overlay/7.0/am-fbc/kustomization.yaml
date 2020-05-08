@@ -1,13 +1,10 @@
 # Deploys to prod.iam.forgeops.com. Uses the Let's encrypt issuer for SSL.
+# namespace: fbc
 namespace: fbctest
 resources:
   - ../../../base/kustomizeConfig
-  - ../../../base/forgeops-secrets
-#  - ../../../base/am
-  - ../../../base/7.0/ds/idrepo
-  - ../../../base/7.0/ds/cts
-#  - ../../../base/7.0/ingress
-  - ../../../base/ldif-importer
+  - ../../../base/am
+  - ../../../base/7.0/ingress
 
 configMapGenerator:
 - name: platform-config
@@ -19,7 +16,6 @@ configMapGenerator:
   - SUBDOMAIN=iam
   - DOMAIN=forgeops.com
   - AM_URL=https://$(NAMESPACE).iam.forgeops.com/am
-  - AM_ADMIN_URL=https://$(NAMESPACE).iam.example.com/am/ui-admin/
   - IDM_ADMIN_URL=https://$(NAMESPACE).iam.forgeops.com/admin
   - IDM_UPLOAD_URL=https://$(NAMESPACE).iam.forgeops.com/upload
   - IDM_EXPORT_URL=https://$(NAMESPACE).iam.forgeops.com/export
@@ -27,10 +23,20 @@ configMapGenerator:
   - IDM_REST_URL=https://$(NAMESPACE).iam.forgeops.com/openidm
   - ENDUSER_UI_URL=https://$(NAMESPACE).iam.forgeops.com/enduser
   - LOGIN_UI_URL=https://$(NAMESPACE).iam.forgeops.com/login/#/service/Login
-  - ENDUSER_CLIENT_ID=end-user-ui
-  - ADMIN_CLIENT_ID=idm-admin-ui
+  - ENDUSER_CLIENT_ID=endUserUIClient
+  - ADMIN_CLIENT_ID=idmAdminClient
   - THEME=default
+  # Additional FBC. TODO; Rationalize these
+  - AM_SERVER_FQDN=$(NAMESPACE).iam.forgeops.com
+  - AM_STORES_USER_SERVERS=ds-idrepo-0.ds-idrepo
+  # - AM_STORES_CTS_SERVERS=ds-cts-0.ds-cts
+  - AM_STORES_CTS_SERVERS=ds-idrepo-0.ds-idrepo
+  - AM_STORES_APPLICATION_SERVERS=ds-idrepo-0.ds-idrepo
+  - AM_STORES_POLICY_SERVERS=ds-idrepo-0.ds-idrepo
 
+
+#  - AM_CONFIG_MODE=PROVIDED
+#  - FBC_ENABLED=true
 
 # The variables defined below can be referenced in resources using the syntax $(VARIABLE)
 vars:

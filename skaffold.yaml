@@ -267,5 +267,12 @@ profiles:
   deploy:
     kustomize:
       path: ./kustomize/overlay/7.0/fbc-ds
-
-
+# deploy only AM - for testing
+- name: am-fbc
+  build:
+    artifacts:
+    - image: am
+      context: docker/am-fbc
+  deploy:
+    kustomize:
+      path: ./kustomize/overlay/7.0/am-fbc
