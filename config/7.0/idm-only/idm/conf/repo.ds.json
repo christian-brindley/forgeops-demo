@@ -391,7 +391,7 @@
                     },
                     "postalAddress": {
                         "type": "simple",
-                        "ldapAttribute": "postalAddress"
+                        "ldapAttribute": "street"
                     },
                     "displayName": {
                         "type": "simple",
