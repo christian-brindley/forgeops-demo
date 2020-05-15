@@ -1,0 +1,24 @@
+{
+  "metadata" : {
+    "realm" : "/",
+    "entityType" : "",
+    "entityId" : "Lw",
+    "uid" : "ou=services,ou=am-config",
+    "sunServiceID" : null,
+    "objectClass" : [ "top", "sunServiceComponent", "organizationalunit" ],
+    "pathParams" : { },
+    "ou" : [ ]
+  },
+  "data" : {
+    "aliases" : [ "am-config", "am", "lee.iam.forgeops.com" ],
+    "parentPath" : "",
+    "_type" : {
+      "_id" : "",
+      "name" : "",
+      "collection" : false
+    },
+    "name" : "/",
+    "active" : true,
+    "_id" : "root"
+  }
+}
