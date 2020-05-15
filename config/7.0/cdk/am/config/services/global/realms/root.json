@@ -10,7 +10,7 @@
     "ou" : [ ]
   },
   "data" : {
-    "aliases" : [ "am-config", "am", "lee.iam.forgeops.com" ],
+    "aliases" : [ "am-config", "am", "&{fqdn}" ],
     "parentPath" : "",
     "_type" : {
       "_id" : "",

@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 
 # Checking idrepo store is up
-echo "Waiting for ds-idrepo-0 to be available. Trying /alive endpoint"
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ds-idrepo-0.ds-idrepo:8080/alive)" != "200" ]];
-do
-        sleep 5;
-done
-echo "ds-idrepo-0 is responding"
+
+wait_repo() {
+    REPO="$1-0.$1"
+    echo "Waiting for $REPO to be available. Trying /alive endpoint"
+    while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' $REPO:8080/alive)" != "200" ]];
+    do
+            sleep 5;
+    done
+    echo "$REPO is responding"
+}
+
+
+wait_repo ds-idrepo
+wait_repo ds-cts
 
 
 # Set the DS passwords for each store
