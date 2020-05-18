@@ -1,14 +1,11 @@
 # Phil's experimental image
-FROM gcr.io/engineering-devops/am-fbc:7.0.0-9124a835300631a82200d88fb5dafbbeec0cb5c2
+FROM gcr.io/engineering-devops/am-fbc:7.0.0-7bb8d7ce0d87fc7636ed954940c20f8a0c49b075
 
 USER root
 
 RUN apt-get update && apt-get install -y git
 
 USER forgerock
-
-# for testing if we want to override the entrypoint...
-COPY  --chown=forgerock:root docker-entrypoint.sh /home/forgerock
 
 COPY  --chown=forgerock:root config/ /home/forgerock/openam/config/
 
