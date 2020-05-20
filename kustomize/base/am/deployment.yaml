@@ -51,16 +51,10 @@ spec:
             memory: 1000Mi
             cpu: 250m
         volumeMounts:
-        # - name: am-boot-secrets
-        #   mountPath: /var/run/secrets/am/boot
         - name: truststore
           mountPath: /var/run/secrets/truststore
         - name: am-secrets
-          mountPath: /var/run/secrets/openam
-        # - name: am-passwords
-        #   mountPath: /var/run/secrets/openam
-        # - name: am-keystore
-        #   mountPath: /var/run/secrets/openam
+          mountPath: /var/run/secrets/am
         - name: amster-keys
           mountPath: /var/run/secrets/amster
       terminationGracePeriodSeconds: 10
@@ -72,12 +66,6 @@ spec:
              name: am-passwords
           - secret:
               name: am-keystore
-      # - name: am-keystore
-      #   secret:
-      #     secretName: am-keystore
-      # - name: am-passwords
-      #   secret:
-      #     secretName: am-passwords
       - name: ds
       - name: amster-keys
         secret:
@@ -85,4 +73,3 @@ spec:
       - name: truststore
         secret:
           secretName: truststore
-
