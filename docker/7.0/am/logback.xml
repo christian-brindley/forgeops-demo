@@ -5,9 +5,9 @@
                 <includeMdcKeyName>transactionId</includeMdcKeyName>
         </encoder> -->
 
-        <!--      <pattern>%d{ISO8601} [%X{transactionId}] %-5level %logger{5} - %m%n%ex</pattern> -->
+        <!--      <pattern>%d{ISO8601}  %-5level %logger{5} - %m%n%ex</pattern> -->
         <encoder>
-            <pattern>%d{ISO8601} %-5level %logger{5} - %m%n%ex</pattern>
+            <pattern>%d{ISO8601} [%X{transactionId}] %-5level %logger{5} - %m%n%ex</pattern>
         </encoder>
     </appender>
 
@@ -15,7 +15,7 @@
         <appender-ref ref="JSON" />
     </logger>
 
-    <root level="WARN">
+    <root level="DEBUG">
         <appender-ref ref="JSON" />
     </root>
 </configuration>
