@@ -9,9 +9,7 @@ spec:
         app: amster
     spec:
       containers:
-      - args:
-        - import
-        env:
+      - env:
         - name: NAMESPACE
           valueFrom:
             fieldRef:

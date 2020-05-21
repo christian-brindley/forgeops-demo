@@ -10,3 +10,4 @@ ARG profile_version
 RUN bin/setup.sh "$profile_version"  && rm bin/setup.sh
 # Debug Kaniko - CLOUD-1955
 #RUN find . -user root  && find . -name \*.wh
+

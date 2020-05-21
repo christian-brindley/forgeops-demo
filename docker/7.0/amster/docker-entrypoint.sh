@@ -5,6 +5,7 @@
 
 set -x
 
+echo $1
 
 exit_script() {
     echo "Got signal. Killing child processes"
@@ -37,14 +38,14 @@ VERSION=${BASH_REMATCH[1]}
 echo "Amster version is: '${VERSION}'"
 export VERSION
 
-
-case $1  in
+case $ACTION  in
 pause)
     pause
     ;;
 export)
     # TO DO - export dynamic config
     ./export.sh
+    sleep infinity
     ;;
 import)
     # Without this chmod, Docker does not know the file is executable on Windows
