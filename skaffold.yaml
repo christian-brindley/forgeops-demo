@@ -281,8 +281,24 @@ profiles:
       context: docker/7.0/am
     - image: amster
       context: docker/7.0/amster
+      docker:
+        buildArgs:
+          action: "import"
     - image: idm
       context: docker/7.0/idm
   deploy:
     kustomize:
       path: ./kustomize/overlay/7.0/am-fbc
+
+- name: amster-export
+  build:
+    artifacts:
+    - image: amster
+      context: docker/7.0/amster
+      docker:
+        buildArgs:
+          action: "export"
+  deploy:
+    kustomize:
+      path: ./kustomize/overlay/7.0/amster-export
+        

@@ -190,12 +190,38 @@ export_config(){
 			kubectl cp idm-0:/opt/openidm/conf "$DOCKER_ROOT/idm/conf"
 			;;
 		amster)
-			echo "Finding the amster pod"
-			pod=$(kubectl get pod -l app=amster -o jsonpath='{.items[0].metadata.name}')
-			echo "Executing amster export from $pod"
-			kubectl exec "$pod" -it /opt/amster/export.sh
 			rm -fr "$DOCKER_ROOT/amster/config"
-			kubectl cp "$pod":/var/tmp/amster "$DOCKER_ROOT/amster/config"
+
+			echo "Removing any existing Amster jobs..."
+			kubectl delete job amster || true
+
+			# Deploy Amster job
+			echo "Deploying Amster job..."
+			exp=$(skaffold run -p amster-export)
+
+			# Check to see if Amster pod is running
+			echo "Waiting for Amster pod to come up."
+			while ! [[ "$(kubectl get pod -l app=amster --field-selector=status.phase=Running)" ]];
+			do
+					sleep 5;
+			done
+			printf "Amster job is responding..\n\n"
+
+			pod=`kubectl get pod -l app=amster -o jsonpath='{.items[0].metadata.name}'`
+			
+			# Export OAuth2Clients and IG Agents
+			echo "Executing Amster export within the amster pod"
+			kubectl exec $pod -it /opt/amster/export.sh
+
+			echo "Copying the export to the ./tmp directory"
+			kubectl cp $pod:/var/tmp/amster/realms/root/ "$DOCKER_ROOT/amster/config"
+
+			printf "Dynamic config exported\n\n"
+
+			# Shut down Amster job
+			printf "Shutting down Amster job...\n"
+
+			del=$(skaffold delete -p amster-export)
 			;;
 		am)
 			# TODO
@@ -226,6 +252,13 @@ save_config()
 			# Clean any existing files
 			rm -fr "$PROFILE_ROOT/amster/config"
 			mkdir -p "$PROFILE_ROOT/amster/config"
+			
+			# Add version parameter
+			find "$DOCKER_ROOT/amster/config" -name "*.json" -exec sed -i '' 's/"amsterVersion" : ".*"/"amsterVersion" : "\&{version}"/g' {} \;
+
+			## TODO Need to fix up fqdns with ${fqdn}
+			# sed -i '' 's/https:\/\/.*\/enduser\/appAuthHelperRedirect.html/https:\/\/\&{fqdn}\/enduser\/appAuthHelperRedirect.html/g' "$PROFILE_ROOT/amster/config/OAuth2Clients/end-user-ui.json"
+
 			cp -R "$DOCKER_ROOT/amster/config"  "$PROFILE_ROOT/amster"
 			;;
 		am)
