@@ -70,7 +70,7 @@ timestamps {
         pipeline.build()
     }
 
-    if ('fbc' in [env.CHANGE_TARGET, env.BRANCH_NAME]) {
+    if ('fbc2' in [env.CHANGE_TARGET, env.BRANCH_NAME]) {
         pipeline.postBuildTests(pipelineRun)
 
         // Uncomment when fbc branch merges into master
