@@ -125,8 +125,6 @@ useRandomPass am-env-secrets/AM_CONFIRMATION_ID_HMAC_KEY 32
 
 genRSA test 2048
 genRSA rsajwtsigningkey 2048
-genRSA selfserviceenctest 2048
-genKey selfservicesigntest HmacSHA256 256
 
 # import SMS transport key which is the key used to encrypt the config in the forgeops-init repo.
 echo "[AM Keystore] Importing SMS transport key"
@@ -157,6 +155,8 @@ keytoolgen -importpass -alias configstorepwd $(useRandomPass ds-passwords/dirman
 
 
 genRSA rsajwtsigningkey 2048
+genRSA selfserviceenctest 2048
+genKey selfservicesigntest HmacSHA256 256
 genEC es256test 256
 genEC es384test 384
 # Yes, es512test 521 is correct, see: https://backstage.forgerock.com/docs/am/6.5/authentication-guide/#configure-ecdsa-client-basedd
