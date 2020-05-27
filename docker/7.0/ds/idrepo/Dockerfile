@@ -1,6 +1,4 @@
-FROM gcr.io/forgerock-io/ds-empty/pit1:7.0.0-790620fbfc56c3bdfe613d24ebebb1f3a0919523
-# Matt test
-#FROM gcr.io/engineering-devops/ds-empty-test:latest
+FROM gcr.io/forgerock-io/ds-empty/pit1:7.0.0-8243f35996f0bd5baf4d152d8e9a6f2a54b0a2e6
 USER root
 RUN chown -R forgerock:root /opt/opendj
 
