@@ -6,6 +6,9 @@ resources:
   - ../../../base/amster
   - ../../../base/idm
   - ../../../base/7.0/ingress
+  - ../../../base/end-user-ui
+  - ../../../base/login-ui
+  - ../../../base/admin-ui
 
 configMapGenerator:
 - name: platform-config
