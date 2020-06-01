@@ -64,6 +64,7 @@
       "defaultMaxAgeEnabled" : false
     },
     "coreOAuth2ClientConfig" : {
+      "userpassword" : "&{idm.provisioning.client.secret|openidm}",
       "loopbackInterfaceRedirection" : false,
       "authorizationCodeLifetime" : 0,
       "accessTokenLifetime" : 0,
