@@ -1,7 +1,6 @@
 {
   "metadata" : {
     "realm" : "/",
-    "amsterVersion" : "&{version}",
     "entityType" : "OAuth2Provider",
     "entityId" : "default",
     "serviceVersion" : null,

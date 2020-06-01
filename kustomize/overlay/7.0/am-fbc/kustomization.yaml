@@ -34,8 +34,6 @@ configMapGenerator:
   - AM_SERVER_FQDN=$(NAMESPACE).iam.forgeops.com
   - AM_STORES_USER_SERVERS=ds-idrepo-0.ds-idrepo:1389
   - AM_STORES_CTS_SERVERS=ds-cts-0.ds-cts:1389
-  - AM_STORES_POLICY_SERVERS=ds-idrepo-0.ds-idrepo:1389
-  - AM_STORES_APPLICATION_SERVERS=ds-idrepo-0.ds-idrepo:1389
 generatorOptions:
  disableNameSuffixHash: true
 

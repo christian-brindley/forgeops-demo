@@ -1,7 +1,6 @@
 {
   "metadata" : {
     "realm" : null,
-    "amsterVersion" : "&{version}",
     "entityType" : "KeyStoreSecretStore",
     "entityId" : "default/default-keystore/mappings/am.services.oauth2.remote.consent.response.decryption",
     "serviceVersion" : null,

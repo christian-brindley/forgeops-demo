@@ -1,7 +1,6 @@
 {
   "metadata" : {
     "realm" : null,
-    "amsterVersion" : "&{version}",
     "entityType" : "ScriptingService",
     "entityId" : "default/AUTHENTICATION_TREE_DECISION_NODE/EngineConfiguration",
     "serviceVersion" : "24b09aa8-a51c-4ccf-a07c-9a9dd08eeefd",

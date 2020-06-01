@@ -3,6 +3,48 @@ objectclass: organizationalunit
 objectclass: top
 ou: services
 
+dn: ou=AgentService,ou=services,ou=am-config
+objectclass: sunServiceComponent
+objectclass: top
+ou: AgentService
+
+dn: ou=1.0,ou=AgentService,ou=services,ou=am-config
+objectclass: sunService
+objectclass: top
+ou: 1.0
+
+dn: ou=Global,ou=1.0,ou=AgentService,ou=services,ou=am-config
+objectclass: organizationalunit
+objectclass: top
+ou: Global
+
+dn: ou=Instances,ou=1.0,ou=AgentService,ou=services,ou=am-config
+objectclass: organizationalunit
+objectclass: top
+ou: Instances
+
+dn: ou=PluginConfig,ou=1.0,ou=AgentService,ou=services,ou=am-config
+objectclass: organizationalunit
+objectclass: top
+ou: PluginConfig
+
+dn: ou=OrganizationConfig,ou=1.0,ou=AgentService,ou=services,ou=am-config
+objectclass: organizationalunit
+objectclass: top
+ou: OrganizationConfig
+
+dn: ou=agentgroup,ou=OrganizationConfig,ou=1.0,ou=AgentService,ou=services,ou=am-config
+objectclass: organizationalunit
+objectClass: sunServiceComponent
+objectclass: top
+ou: agentgroup
+
+dn: ou=default,ou=OrganizationConfig,ou=1.0,ou=AgentService,ou=services,ou=am-config
+objectclass: organizationalunit
+objectClass: sunServiceComponent
+objectclass: top
+ou: default
+
 dn: ou=sunEntitlementIndexes,ou=services,ou=am-config
 objectclass: sunService
 objectclass: top
@@ -199,7 +241,7 @@ objectclass: sunServiceComponent
 objectclass: top
 ou: 76656a38-5f8e-401b-83aa-4ccb74ce88d2
 sunKeyValue: description=The built-in URL Resource Type available to OpenAM
- Policies.
+  Policies.
 sunKeyValue: lastModifiedBy=id=dsameuser,ou=user,ou=am-config
 sunKeyValue: lastModifiedDate=1422892465848
 sunKeyValue: creationDate=1422892465848
