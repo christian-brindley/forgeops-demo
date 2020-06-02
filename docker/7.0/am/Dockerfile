@@ -1,5 +1,5 @@
 # Phil's experimental image
-FROM gcr.io/engineering-devops/am-fbc:7.0.0-3adc3c5f88f839d9305ce3936b58999aced2d6d1
+FROM gcr.io/engineering-devops/am-fbc:7.0.0-c22796d23fbb31b48414b74f92c4cefc17f9fd7f
 
 USER root
 
