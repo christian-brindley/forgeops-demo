@@ -123,21 +123,6 @@ useRandomPass am-env-secrets/AM_SELFSERVICE_LEGACY_CONFIRMATION_EMAIL_LINK_SIGNI
 useRandomPass am-env-secrets/AM_CONFIRMATION_ID_HMAC_KEY 32
 
 
-genRSA test 2048
-genRSA rsajwtsigningkey 2048
-
-# import SMS transport key which is the key used to encrypt the config in the forgeops-init repo.
-echo "[AM Keystore] Importing SMS transport key"
-keytoolgen -importkeystore \
-  -destalias "sms.transport.key" \
-  -srcalias "sms.transport.key" \
-  -srcstoretype jceks \
-  -srckeystore "sms-transport-key/sms-transport-key.jceks" \
-  -srckeypass:file "sms-transport-key/keypass" \
-  -srcstorepass:file "sms-transport-key/storepass"
-
-closeKeystore
-
 # Legacy Keystore - includes boot passwords
 openKeystore "am-keystore/keystore.jceks" \
     jceks \
@@ -153,7 +138,6 @@ keytoolgen -importpass -alias dsameuserpwd $(useRandomPass am-env-secrets/AM_PAS
 keytoolgen -importpass -alias configstorepwd $(useRandomPass ds-passwords/dirmanager.pw 24 print)
 
 
-
 genRSA rsajwtsigningkey 2048
 genRSA selfserviceenctest 2048
 genKey selfservicesigntest HmacSHA256 256
@@ -166,7 +150,17 @@ genKey hmacsigningtest HMacSHA512 512
 genKey directenctest aes 256
 
 genRSA test 2048
-genRSA rsajwtsigningkey 2048
+
+
+# import SMS transport key which is the key used to encrypt the config in the forgeops-init repo.
+echo "[AM Keystore] Importing SMS transport key"
+keytoolgen -importkeystore \
+  -destalias "sms.transport.key" \
+  -srcalias "sms.transport.key" \
+  -srcstoretype jceks \
+  -srckeystore "sms-transport-key/sms-transport-key.jceks" \
+  -srckeypass:file "sms-transport-key/keypass" \
+  -srcstorepass:file "sms-transport-key/storepass"
 
 # genKey sms.transport.key aes 128
 closeKeystore

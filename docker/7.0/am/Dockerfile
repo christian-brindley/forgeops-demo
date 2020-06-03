@@ -12,6 +12,8 @@ COPY  --chown=forgerock:root config/ /home/forgerock/openam/config/
 # Use a custom logback. Comment out if you want to use the default json logger.
 COPY logback.xml /usr/local/tomcat/webapps/am/WEB-INF/classes
 
+COPY docker-entrypoint.sh /home/forgerock
+
 WORKDIR /home/forgerock/openam
 
 # This lets the user see what FBC files have been modified
