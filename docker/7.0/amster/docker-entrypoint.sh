@@ -5,7 +5,10 @@
 
 set -x
 
-echo $1
+# If a command arg is not passed, default to import
+ACTION="${1:-import}"
+
+echo "amster action is $ACTION"
 
 exit_script() {
     echo "Got signal. Killing child processes"

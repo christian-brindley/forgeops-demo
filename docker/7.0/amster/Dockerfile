@@ -8,9 +8,5 @@ ENV SERVER_URI /am
 
 COPY --chown=forgerock:root . /opt/amster
 
-ARG action
-
-ENV ACTION "$action"
-
 ENTRYPOINT [ "/opt/amster/docker-entrypoint.sh" ]
 

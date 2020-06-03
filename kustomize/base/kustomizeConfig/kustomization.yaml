@@ -4,3 +4,56 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 
 configurations:
 - kustomizeConfig.yaml
+
+
+configMapGenerator:
+- name: platform-config
+  # The env vars below can be passed into a pod using the envFrom pod spec.
+  # These global variables can be used to parameterize your deployments.
+  # The FQDN and URLs here should match your ingress or istio gateway definitions
+  literals:
+  - SUBDOMAIN=iam
+  - DOMAIN=example.com
+  - FQDN=$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)
+  - AM_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/am
+  - AM_ADMIN_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/am/ui-admin/
+  - IDM_ADMIN_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/admin
+  - IDM_UPLOAD_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/upload
+  - IDM_EXPORT_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/export
+  - PLATFORM_ADMIN_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/platform
+  - IDM_REST_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/openidm
+  - ENDUSER_UI_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/enduser
+  - LOGIN_UI_URL=https://$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)/login/#/service/Login
+  - ENDUSER_CLIENT_ID=end-user-ui
+  - ADMIN_CLIENT_ID=idm-admin-ui
+  - THEME=default
+  - AM_STORES_CTS_SERVERS="ds-cts-0.ds-cts:1389"
+  - AM_STORES_USER_SERVERS="ds-idrepo-0.ds-idrepo:1389"
+  - AM_SERVER_FQDN="$(NAMESPACE).$(SUBDOMAIN).$(DOMAIN)"
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+# The variables defined below can be referenced in resources using the syntax $(VARIABLE)
+vars:
+- name: DOMAIN
+  fieldref:
+    fieldpath: data.DOMAIN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- name: SUBDOMAIN
+  fieldref:
+    fieldpath: data.SUBDOMAIN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+- name: NAMESPACE
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: platform-config
+  fieldref:
+    fieldpath: metadata.namespace
