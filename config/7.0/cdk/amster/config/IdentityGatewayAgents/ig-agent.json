@@ -8,6 +8,7 @@
   },
   "data" : {
     "_id" : "ig-agent",
+    "userpassword": "&{ig.agent.password|password}",
     "agentgroup" : null,
     "status" : "Active",
     "igCdssoRedirectUrls" : [ "http://am:80/am/cdcservlet" ],
