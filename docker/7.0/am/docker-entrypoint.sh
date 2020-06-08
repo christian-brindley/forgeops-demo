@@ -108,7 +108,7 @@ export AM_OIDC_CLIENT_SUBJECT_IDENTIFIER_HASH_SALT="${AM_OIDC_CLIENT_SUBJECT_IDE
 export AM_SELFSERVICE_LEGACY_CONFIRMATION_EMAIL_LINK_SIGNING_KEY=$(echo -n "${AM_SELFSERVICE_LEGACY_CONFIRMATION_EMAIL_LINK_SIGNING_KEY:-$(generateRandomSecret)}" | base64)
 
 
-export AM_PROMETHEUS_PASSWORD_ENCRYPTED=$(echo -n "prometheus" |  am-crypto encrypt des)
+export AM_PROMETHEUS_PASSWORD_ENCRYPTED=$( echo -n "${AM_PROMETHEUS_PASSWORD:-prometheus}" | am-crypto encrypt des )
 
 if [ ! -z "$JPDA_DEBUG" ]; then
   # For debugging purposes
