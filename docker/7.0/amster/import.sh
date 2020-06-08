@@ -16,8 +16,8 @@ ALIVE="${INSTANCE}/isAlive.jsp"
 
 wait_for_openam()
 {
-    # If we get lucky, AM will be up before the first curl command is issued.
-    sleep 20
+   # If we get lucky, AM will be up before the first curl command is issued.
+   sleep 20
    response="000"
 
 	while true
@@ -57,6 +57,18 @@ if [  ${IMPORT_SCRIPT} ]; then
     cd ${DIR}
 
    # Use the internal hostname for AM. The external name might not have a proper SSL certificate
-   sh ./amster -q ${IMPORT_SCRIPT} -D AM_HOST="${INSTANCE}" || exit 1
+    $JAVA_HOME/bin/java -jar ./amster-*.jar  ${IMPORT_SCRIPT} -q -D AM_HOST="${INSTANCE}"  > /tmp/out.log 2>&1
+
+   echo "Amster output *********"
+   cat /tmp/out.log
+   # There is a workaround to see if the import failed, and return a non zero exit code if it did
+   # See https://bugster.forgerock.org/jira/browse/OPENAM-11431
+
+   if grep -q ERRORS </tmp/out.log; then
+         echo "Amster import errors"
+         exit 1
+   fi
 fi
+
+
 echo  "done"
