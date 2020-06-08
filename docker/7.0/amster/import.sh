@@ -56,9 +56,7 @@ if [  ${IMPORT_SCRIPT} ]; then
 
     cd ${DIR}
 
-   #  sh ./amster -q ${IMPORT_SCRIPT} -D AM_HOST="https://${FQDN}/am"
-
-sh ./amster -q ${IMPORT_SCRIPT} -D AM_HOST="${INSTANCE}"
+   # Use the internal hostname for AM. The external name might not have a proper SSL certificate
+   sh ./amster -q ${IMPORT_SCRIPT} -D AM_HOST="${INSTANCE}" || exit 1
 fi
-
-echo "Import script finished"
+echo  "done"

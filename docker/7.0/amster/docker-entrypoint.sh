@@ -10,17 +10,6 @@ ACTION="${1:-import}"
 
 echo "amster action is $ACTION"
 
-exit_script() {
-    echo "Got signal. Killing child processes"
-    trap - SIGINT SIGTERM # clear the trap
-    kill -- -$$ # Sends SIGTERM to child/sub processes
-    echo "Exiting"
-    exit 0
-}
-
-trap exit_script SIGINT SIGTERM SIGUSR1 EXIT
-
-
 
 pause() {
     echo "Args are $# "
