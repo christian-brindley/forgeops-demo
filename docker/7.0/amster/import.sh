@@ -56,8 +56,9 @@ if [  ${IMPORT_SCRIPT} ]; then
 
     cd ${DIR}
 
-    sh ./amster -q ${IMPORT_SCRIPT} -D AM_HOST="https://${FQDN}/am"
+   #  sh ./amster -q ${IMPORT_SCRIPT} -D AM_HOST="https://${FQDN}/am"
 
+sh ./amster -q ${IMPORT_SCRIPT} -D AM_HOST="${INSTANCE}"
 fi
 
 echo "Import script finished"
