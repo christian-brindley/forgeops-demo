@@ -1,6 +1,5 @@
 # Phil's experimental image
-FROM gcr.io/engineering-devops/am-fbc:7.0.0-c22796d23fbb31b48414b74f92c4cefc17f9fd7f
-
+FROM gcr.io/engineering-devops/am-fbc:7.0.0-e8d1862c550fa215e2b3211ae201bab1ec644200
 USER root
 
 RUN apt-get update && apt-get install -y git
@@ -12,7 +11,7 @@ COPY  --chown=forgerock:root config/ /home/forgerock/openam/config/
 # Use a custom logback. Comment out if you want to use the default json logger.
 COPY logback.xml /usr/local/tomcat/webapps/am/WEB-INF/classes
 
-COPY docker-entrypoint.sh /home/forgerock
+COPY custom-entrypoint.sh /home/forgerock
 
 WORKDIR /home/forgerock/openam
 
@@ -23,3 +22,5 @@ RUN git config --global user.email "cloud-deployment@forgerock.com" && \
     git commit -m "CDM file-based configuration overlay"
 
 WORKDIR /home/forgerock
+
+ENTRYPOINT ["/home/forgerock/custom-entrypoint.sh"]

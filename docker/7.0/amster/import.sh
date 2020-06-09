@@ -61,10 +61,10 @@ if [  ${IMPORT_SCRIPT} ]; then
 
    echo "Amster output *********"
    cat /tmp/out.log
-   # There is a workaround to see if the import failed, and return a non zero exit code if it did
-   # See https://bugster.forgerock.org/jira/browse/OPENAM-11431
 
-   if grep -q ERRORS </tmp/out.log; then
+   # This is a workaround to test if the import failed, and return a non zero exit code if it did
+   # See https://bugster.forgerock.org/jira/browse/OPENAM-11431
+   if grep -q 'ERRORS\|Configuration\ failed\|Could\ not\ connect\|No\ connection\|Unexpected\ response' </tmp/out.log; then
          echo "Amster import errors"
          exit 1
    fi
