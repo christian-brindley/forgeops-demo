@@ -49,12 +49,15 @@ backup_restore_info () {
     echo ""
 }
 
-# Get major version by presence of ds-env-secrets secret.
+# Get major version by presence of a version specific secret.
 get_version () {
     if ( secret=$(kubectl get secret ds-env-secrets 2>/dev/null) ); then
         version="7.0"
-    else
+    elif ( secret=$(kubectl get secret am-boot-secrets 2>/dev/null) ); then
         version="6.5"
+    else
+        echo "Can't find any secrets"
+        exit 1
     fi
 }
 
@@ -69,7 +72,7 @@ if [[ "$#" > 0 ]]; then
             ;;
 
             "idmadmin")
-                [[ "$version" == "7.0" ]] && echo "No IDM admin password for version 7.0"
+                [[ "$version" == "7.0" ]] && echo "openidm-admin" && exit 0
                 [[ "$version" == "6.5" ]] && openidm_admin_password | head -n 1 | awk '{print $1;}'
             ;;
 
@@ -117,4 +120,3 @@ else
     ${version}_setup_profile_service_account_passwords all
     backup_restore_info
 fi
-
