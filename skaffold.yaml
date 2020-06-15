@@ -34,10 +34,6 @@ kind: Config
     - &AM_KANIKO
       <<: *AM
       kaniko: *kaniko-opts
-    - &AM-FBC_KANIKO
-      image: am
-      context: docker/7.0/am-fbc
-      kaniko: *kaniko-opts
 
     - &AMSTER
       image: amster
