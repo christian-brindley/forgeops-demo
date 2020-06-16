@@ -10,7 +10,7 @@
     "ou" : [ "prometheus" ]
   },
   "data" : {
-    "password" : "&{AM_PROMETHEUS_PASSWORD_ENCRYPTED}",
+    "password" : "&{am.monitoring.prometheus.password.encrypted}",
     "_type" : {
       "_id" : "iPlanetAMMonitoringService",
       "name" : "iPlanetAMMonitoringService",

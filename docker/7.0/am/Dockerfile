@@ -1,5 +1,5 @@
 # Phil's experimental image
-FROM gcr.io/engineering-devops/am-fbc:7.0.0-e8d1862c550fa215e2b3211ae201bab1ec644200
+FROM gcr.io/engineering-devops/am-fbc:7.0.0-b88a5200251a75e788da806d60c4c0c7e008ee5e
 USER root
 
 RUN apt-get update && apt-get install -y git
