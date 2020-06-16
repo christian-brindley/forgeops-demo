@@ -10,7 +10,6 @@ am-crypto() {
 }
 
 # Additiomal place holder
-export AM_PROMETHEUS_PASSWORD_ENCRYPTED=$( echo -n "${AM_PROMETHEUS_PASSWORD:-prometheus}" | am-crypto encrypt des )
 
 
 # These need to base64 encoded for now. When the secret gen is finished, remove these
@@ -20,5 +19,11 @@ export AM_SESSION_STATELESS_ENCRYPTION_KEY=$(echo -n "$AM_SESSION_STATELESS_ENCR
 export AM_SELFSERVICE_LEGACY_CONFIRMATION_EMAIL_LINK_SIGNING_KEY=$(echo -n "$AM_SELFSERVICE_LEGACY_CONFIRMATION_EMAIL_LINK_SIGNING_KEY" | base64)
 
 export AM_STORES_USER_TYPE=LDAPv3ForForgeRockIAM
+
+# Delete this once Phil's change is merged:
+export AM_PROMETHEUS_PASSWORD_ENCRYPTED=$( echo -n "${AM_PROMETHEUS_PASSWORD:-prometheus}" | am-crypto encrypt des )
+
+# New standard is this:
+export AM_MONITORING_PROMETHEUS_PASSWORD_ENCRYPTED=$( echo -n "${AM_PROMETHEUS_PASSWORD:-prometheus}" | am-crypto encrypt des )
 
 exec /home/forgerock/docker-entrypoint.sh
