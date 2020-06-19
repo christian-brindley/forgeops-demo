@@ -224,6 +224,7 @@ profiles:
     - *DS-CTS
     - *DS-IDREPO
     - *FORGEOPS-SECRETS
+    - *LDIF-IMPORTER
     tagPolicy:
       gitCommit: {}
   deploy:
@@ -258,10 +259,10 @@ profiles:
 - name: persistence
   build:
     artifacts:
-    - *DS-CTS_KANIKO
-    - *DS-IDREPO_KANIKO
-    - *FORGEOPS-SECRETS_KANIKO
-    - *LDIF-IMPORTER_KANIKO
+    - *DS-CTS
+    - *DS-IDREPO
+    - *FORGEOPS-SECRETS
+    - *LDIF-IMPORTER
     cluster: *kaniko-cluster
     tagPolicy:
       gitCommit: {}
