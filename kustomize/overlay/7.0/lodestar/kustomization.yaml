@@ -20,18 +20,19 @@ patchesStrategicMerge:
   metadata:
     name: am
   spec:
+    replicas: 1
     template:
       spec:
         containers:
           - name: openam
+            imagePullPolicy: Always
             resources:
               requests:
-                memory: 4Gi
-                cpu: 2000m
+                cpu: 11
+                memory: 8Gi
               limits:
-                memory: 5Gi
-                cpu: 3000m
-            imagePullPolicy: Always
+                cpu: 12
+                memory: 11Gi
 
 - |-
   #Patch DS CTS
@@ -45,13 +46,14 @@ patchesStrategicMerge:
       spec:
         containers:
           - name: ds
+            imagePullPolicy: Always
             resources:
               requests:
-                memory: 3Gi
-                cpu: 2000m
+                cpu: 2
+                memory: 8Gi
               limits:
-                memory: 5Gi
-                cpu: 3000
+                cpu: 8
+                memory: 11Gi
         initContainers:
           - name: initialize
             imagePullPolicy: Always
@@ -64,7 +66,7 @@ patchesStrategicMerge:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 100Gi
+            storageSize: 850Gi
         storageClassName: fast
 
 - |-
@@ -79,13 +81,14 @@ patchesStrategicMerge:
       spec:
         containers:
           - name: ds
+            imagePullPolicy: Always
             resources:
               requests:
-                memory: 3Gi
-                cpu: 2000m
+                cpu: 2
+                memory: 8Gi
               limits:
-                memory: 5Gi
-                cpu: 3000
+                cpu: 8
+                memory: 11Gi
         initContainers:
           - name: initialize
             imagePullPolicy: Always
@@ -98,7 +101,7 @@ patchesStrategicMerge:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 100Gi
+            storageSize: 850Gi
         storageClassName: fast
 
 - |-
@@ -113,14 +116,17 @@ patchesStrategicMerge:
       spec:
         containers:
         - name: openidm
+          imagePullPolicy: Always
           resources:
             requests:
+              cpu: 8
               memory: 4Gi
-              cpu: 2000m
             limits:
+              cpu: 10
               memory: 6Gi
-              cpu: 3000m
-          imagePullPolicy: Always
+          env:
+            - name: JAVA_OPTS
+              value: -server -XX:MaxRAMPercentage=75 -Xlog:gc:/tmp/gc.log
 
 - |-
   #Patch IG
